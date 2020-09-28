@@ -141,3 +141,18 @@ tread-loader: 使用 thread-loader 开启多线程
 sourcemap：使用合理的sourcemap
 缩小构建目标：对一些loader使用exclude等属性
 ```
+
+### webpack4
+
+新特性：
+
+```
+1.环境支持，需要node的版本在8.9.4以上
+2.零配置
+3.删除了一些插件，内置了一些插件
+4.生产环境下会自动使用一些功能，比如 treeshaking
+5.开箱即用 WebAssembly
+6.新的插件系统
+```
+
+
