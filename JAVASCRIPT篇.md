@@ -1,6 +1,8 @@
 ## Javascript篇
 
-### 概念
+### 基础
+
+1.概念：狭义的 js 只是 ecmascript，描述了js的语法等；但是由于 js 与浏览器关系密切，所以就有了浏览器特定的 js 扩展：BOM（浏览器对象模型），两者一起就是广义的 js。BOM 里面有一个 DOM（文档对象模型），描述了文档对象的一些东西，除此之外 BOM 还包括 location，navigator，history 等等非文档的东西。
 
 1.原始数据类型：boolean, number, object, array, null, undefined, symbol, bigint
 
@@ -46,9 +48,21 @@ function deepcopy(obj, cache = []) {
 
 10.在 foreach 中使用 return 是没有效果的，所以中断不了 foreach 的循环；因此官方推荐使用 some 或 every。
 
-11.高阶函数：一个函数可以接受另一个函数作为参数或者返回值为一个函数的函数。
+11.let、const的特性：1.不存在变量提升；2.不允许重复声明；3.块级作用域
 
-12.手写柯里化：
+12.Object相关方法：
+
+```
+Object.keys: 是对键名的遍历
+Object.values: 是对键值的遍历
+Object.entries: 是对键值对的遍历
+```
+
+### 函数式
+
+1.高阶函数：一个函数可以接受另一个函数作为参数或者返回值为一个函数的函数。
+
+2.手写柯里化：
 
 ``` js
 function currying(func, ...args1) {
@@ -58,7 +72,7 @@ function currying(func, ...args1) {
 }
 ```
 
-13.柯里化的优点：
+3.柯里化的优点：
 
 ```
 1.参数复用
@@ -66,7 +80,25 @@ function currying(func, ...args1) {
 3.延迟执行
 ```
 
-14.组合继承：
+4.手写函数记忆：
+
+```
+let memorize = (func, content) => {
+    let cache = Object.create(null);
+    content = content || this;
+    return (key) => {
+        if (!cache[key]) {
+            cache[key] = func.call(content, key);
+        }
+
+        return cache[key];
+    }
+}
+```
+
+### 类与原型链
+
+1.组合继承：
 
 ```
 function Parent (name) {
@@ -91,6 +123,7 @@ Function Child2(name，age) {
 
 // 组合继承
 // 把上面结合起来
+// 改进：Child.prototype = Object.create(Parent.prototype);
 Function Child(name, age) {
     Parent.call(this, name);
     this.age = age;
@@ -98,14 +131,58 @@ Function Child(name, age) {
 Child.prototype = new Parent();
 ```
 
-15.原型链：构造函数有一个原型对象prototype，它的实例有一个属性__proto__就指向这个原型对象，而我们在组合继承当中，这个原型对象prototype又是另一个构造函数的实例，所以它也有一个__proto__属性，指向更上层的原型对象，就这样一直指向Object为止。
+2.原型链：构造函数有一个原型对象prototype，它的实例有一个属性__proto__就指向这个原型对象，而我们在组合继承当中，这个原型对象prototype又是另一个构造函数的实例，所以它也有一个__proto__属性，指向更上层的原型对象，就这样一直指向Object为止。
 
-16.构造函数的prototype都有一个constructor属性，它指向这个构造函数，所以可以通过这个来判断类与实例的关系，但是constructor属性是可以被重写的，所以我们一般用instanceof来判断类与实例的关系。
+3.构造函数的prototype都有一个constructor属性，它指向这个构造函数，所以可以通过这个来判断类与实例的关系，但是constructor属性是可以被重写的，所以我们一般用instanceof来判断类与实例的关系。
 
-17.addEventListener的第三个参数 useCapture 的默认值是false，意思是默认在事件冒泡阶段捕获。（DOM事件流：捕获阶段、目标阶段、冒泡阶段）。可以用 preventDefault 阻止默认行为；使用 stopPropagation 阻止冒泡。
+### bom相关
 
-18.浏览器有一个往返缓存 bfcache，用来完全储存前进和后退的网页（此时load事件并不会触发），来加快加载速度。那么怎么在页面上判断是前进或者后退来的呢？可以使用 html5 的 pageshow 和 pagehide 事件。（另外event.persisted可以判断是否来自bfcache）
+1.addEventListener的第三个参数 useCapture 的默认值是false，意思是默认在事件冒泡阶段捕获。（DOM事件流：捕获阶段、目标阶段、冒泡阶段）。可以用 preventDefault 阻止默认行为；使用 stopPropagation 阻止冒泡。
 
-19.javascript 三大家族：client家族、scroll家族、offset家族。（getBoundingClientRect方法可以获取这些属性）
+2.浏览器有一个往返缓存 bfcache，用来完全储存前进和后退的网页（此时load事件并不会触发），来加快加载速度。那么怎么在页面上判断是前进或者后退来的呢？可以使用 html5 的 pageshow 和 pagehide 事件。（另外event.persisted可以判断是否来自bfcache）
 
-20.
+3.javascript 三大家族：client家族、scroll家族、offset家族。（getBoundingClientRect方法可以获取这些属性）
+
+4.数据结构的栈是指后进先出的数据结构，队列是指先进先出的数据结构，树是指具有根节点并且其它节点都是子树节点的数据结构，堆是指满足父子节点大小关系的完全二叉树。操作系统的栈和堆都是指内存空间，不同是的，堆更大，并且按需申请、动态分配内存。
+
+5.垃圾回收机制：原始数据储存在栈空间中，引用类型数据储存在堆空间中。在函数执行上下文之后，就立即销毁栈中的数据（如果这个数据放在闭包里面，则没有放到栈空间而是放到堆空间中）。堆分为新生代和老生代两个区域，它们使用标记-清除的方式进行回收的。在执行上下文创建的时候进行标记，在执行上下文执行完毕的时候进行回收。
+
+### 闭包
+
+1.概念：闭包就是定义在一个函数内部的函数，它在外部函数被回收之后仍然能够读取外部函数中的变量。
+
+2.闭包的作用：模仿块级作用域（进行代码封装）；私有变量
+
+3.作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。Javascript 采用的是词法作用域，也就是静态作用域。
+
+### 事件循环
+
+1.事件循环：在 js 中，大部分任务是在主线程上执行的，而这些任务有轻重之分，需要对它们的执行顺序做一定的安排，所以v8使用队列的方式储存这些任务，让它们交替执行。
+
+2.过程：事件循环遵循宏任务-清空自己的微任务队列-ui渲染-宏任务...的方式执行的，常见的宏任务有各种事件、setTimeout等。常见的微任务有Promise、MutationObserver等等。每个宏任务都有自己的微任务队列。
+
+3.微任务出现的原因：由于宏任务的时间粒度比较大，执行的时间不能精确控制，对一些实时性比较高的需求就不太符合了。
+
+4.MutationObserver 接口提供了监视对 DOM 树所做更改的能力，它被设计为旧的 Mutation Events 功能（本质是宏任务）的替代品。
+
+5.requestAnimationFrame 是一个动画函数，并且让浏览器在下次重绘之前调用指定的回调函数更新动画。它常常被用来作为 setTimeout 的替代品来创建动画。
+
+6.MutationObserver 和 requestAnimationFrame 出现的原因：因为它们之前是使用宏任务实现的，但是在宏任务之后执行另一个宏任务的时候，中间有一段 ui 渲染的过程，特别是当执行多个宏任务的时候，中间有非常多 ui 渲染的过程，非常不必要。所以使用微任务来实现，此时只会把微任务放到微任务队列里面去，并且在 ui 渲染之前执行。
+
+### 尾调用优化
+
+1.尾调用是指一个函数的最后一步是调用另一个函数。必须是一个函数，不能是一个函数表达式或者函数引用。
+
+2.尾调用优化的原因：外层函数在调用的时候，会在内存中形成一个调用栈，然后再调用内层函数的时候，会再压入内层函数的调用栈，在调用完内层函数的时候，会释放内层函数的调用栈，最后再释放外层函数的调用栈。可以看到，外层函数的调用栈是一直存在于内存中的。但是如果内层函数是一个函数的话，其实可以释放外层函数的调用栈的，所以可以大大减少内存的占用。
+
+3.注意：1.实现尾调用优化的方法是把外层函数的变量放到内层函数的参数里面去，所以可能需要多加几个参数（使用参数的默认值解决）。2.只有在严格模式下才能进行尾调用优化。
+
+4.斐波拉切数的尾调用优化递归版本：
+
+```
+// 求第 n 位斐波拉切数
+function fibbo(n, before = 0, temp = 1) {
+    if (n <= 1) return temp;
+    return fibbo(n - 1, temp, before + temp);
+}
+```
