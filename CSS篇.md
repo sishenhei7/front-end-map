@@ -1,10 +1,10 @@
 ## CSS篇
 
-### 字体
+### 基础
 
-```
-注意：手机上最小字体是8px，PC上最小字体是12px。不要使用奇数单位来定义字体大小，否则在低端设备上可能会产生模糊。
-```
+1.字体：手机上最小字体是8px，PC上最小字体是12px。不要使用奇数单位来定义字体大小，否则在低端设备上可能会产生模糊。
+
+2.CSS优先级：important > 内联 > id选择器 > class选择器 > 标签选择器
 
 ### 移动端 1px
 
@@ -221,4 +221,21 @@ SMACSS 命名规范（结构化css）
 定义：盒模型是由内容、内边距、边框、外边距组成（盒子的宽度是指内容的宽度）
 content-box：标准盒模型，盒子的宽度不包括边框和内边距（这个content就是内容）
 border-box：怪异盒模型，盒子的宽度包含边框和内边距（这个border就是指包含border和padding）
+```
+
+### flex
+
+```
+flex-direction: 决定主轴的方向，即项目的排列方向
+flex-wrap: 如果一条轴线排不下，如何换行
+flex-flow: flex-direction 和 flex-wrap 的简写形式
+justify-content: 定义了主轴上的对齐方式
+align-items: 定义了在交叉轴上的对齐方式
+align-content: 定义了很多轴线的对齐方式
+order: 定义了项目的排列顺序
+flex-grow: 定义了项目的放大比例
+flex-shrink: 定义了项目的缩小比例
+flex-basis: 项目占据的主轴空间
+flex: 是flex-grow, flex-shrink, flex-basis的简写
+align-self: 表示单个项目与其他项目的不一样的对齐方式
 ```

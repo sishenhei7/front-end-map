@@ -58,6 +58,38 @@ Object.values: 是对键值的遍历
 Object.entries: 是对键值对的遍历
 ```
 
+13.手写防抖和节流
+
+```
+// throttle
+function throttle(fn, interval = 300) {
+    let lock = false;
+
+    return function (...args) {
+        if (lock) return;
+
+        lock = true;
+        setTimeout(() => {
+            lock = false;
+            fn(...args);
+        }, interval);
+    }
+}
+
+// debounce
+function debounce(fn, interval = 300) {
+    let timeout = null;
+
+    return function (...args) {
+        if (timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+            fn(...args);
+        }, interval);
+    }
+}
+```
+
 ### 函数式
 
 1.高阶函数：一个函数可以接受另一个函数作为参数或者返回值为一个函数的函数。

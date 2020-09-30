@@ -82,6 +82,13 @@ mode: 'production',
 定义: 通过resolve.alias配置
 ```
 
+require 和 import
+
+```
+require: 是一个拷贝，可以放在任何地方，运行时加载
+import: 是一个引用，需要放在最前面，编译时加载
+```
+
 ### 性能优化
 
 打包分析：
