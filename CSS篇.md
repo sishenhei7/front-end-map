@@ -95,6 +95,15 @@ align-self: center;
 justify-self: center;
 ```
 
+图片垂直水平居中：
+
+```
+1.使用line-height和text-align: center
+2.display: table和display: table-cell
+3.使用position
+4.使用background和background-position
+```
+
 ### 布局
 
 文档流：

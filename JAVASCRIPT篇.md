@@ -128,6 +128,47 @@ let memorize = (func, content) => {
 }
 ```
 
+5.手写 promise.all 和 promise.race：
+
+```
+Promise.prototype.all = function (iterator) {
+    let num = 0;
+    const result = [];
+    const len = iterator.length;
+
+    return new Promise((resolve, reject) => {
+        for (item in iterator) {
+            Promise.resolve(item)
+                .then((res) => {
+                    num += 1;
+                    result.push(res);
+
+                    if (num >= len) {
+                        resolve(result);
+                    }
+                })
+                .catch((err) => {
+                    reject(result);
+                });
+        }
+    });
+}
+
+Promise.prototype.race = function (iterator) {
+    return new Promise((resolve, reject) => {
+        for (item in iterator) {
+            Promise.resolve(item)
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        }
+    });
+}
+```
+
 ### 类与原型链
 
 1.组合继承：
