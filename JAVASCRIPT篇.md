@@ -90,6 +90,18 @@ function debounce(fn, interval = 300) {
 }
 ```
 
+14.手写原生 xhr 发送请求：
+
+```
+let Req = new XMLHttpRequest();
+Req.onload = function(res) {
+    console.log(res);
+};
+Req.open('get', url);
+Req.responseType = 'json';
+Req.send();
+```
+
 ### 函数式
 
 1.高阶函数：一个函数可以接受另一个函数作为参数或者返回值为一个函数的函数。
@@ -258,4 +270,16 @@ function fibbo(n, before = 0, temp = 1) {
     if (n <= 1) return temp;
     return fibbo(n - 1, temp, before + temp);
 }
+```
+
+### 项目中用到的 es6
+
+```
+1.let、const这些关键字
+2.变量的解构赋值
+3.箭头函数
+4.数组的foreach、includes、find等方法，对象的for of等方法
+5.模板字符串
+6.promise
+7.class
 ```
