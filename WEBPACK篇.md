@@ -162,4 +162,12 @@ sourcemap：使用合理的sourcemap
 6.新的插件系统
 ```
 
+### loader 和 plugin
+
+1.loader 用于对模块的源代码进行转换，它可以使我在加载的时候预处理文件。plugin 则用于解决 loader 不能解决的所有事。
+
+2.loader 的原理：loader其实就是一个函数，它接收一个 source 参数（就是 resource file），然后返回 1 个或 2 个参数，第一个参数是是字符串表示的 js 代码，第二个参数是 sourceMap。
+
+3.plugin 的原理：plugin 其实就是一个有 apply 方法的类。在这个方法里面使用 tap 或者 tapAsync 进入 webpack 相应的事件钩子，然后使用 webpack 的内部数据做一些处理，在处理完之后调用 webpack 的 callback 方法即可。
+
 
