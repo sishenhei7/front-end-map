@@ -60,7 +60,7 @@ Object.entries: 是对键值对的遍历
 
 13.手写防抖和节流
 
-```
+```js
 // throttle
 function throttle(fn, interval = 300) {
     let lock = false;
@@ -92,7 +92,7 @@ function debounce(fn, interval = 300) {
 
 14.手写原生 xhr 发送请求：
 
-```
+```js
 let Req = new XMLHttpRequest();
 Req.onload = function(res) {
     console.log(res);
@@ -126,7 +126,7 @@ function currying(func, ...args1) {
 
 4.手写函数记忆：
 
-```
+```js
 let memorize = (func, content) => {
     let cache = Object.create(null);
     content = content || this;
@@ -142,7 +142,7 @@ let memorize = (func, content) => {
 
 5.手写 promise.all 和 promise.race：
 
-```
+```js
 Promise.prototype.all = function (iterator) {
     let num = 0;
     const result = [];
@@ -181,11 +181,48 @@ Promise.prototype.race = function (iterator) {
 }
 ```
 
+6.手写flaten:
+
+```js
+// [1, [2, 3, [[4, 5, [6, 7], 8], 9, 10, 11]]]
+// 递归形式
+function flatten(arr) {
+    const result = [];
+    arr.forEach(item => Array.isArray(item) ? result.push(...flaten(item)) : result.push(item));
+    return result;
+}
+
+// 使用tostring
+function flatten_new(arr) {
+    return arr.toString().split(',');
+}
+
+// 尾递归
+function flaten_tail(arr) {
+    const helper = (first, rest, result) => {
+        if (!Array.isArray(first)) {
+            result.push(first);
+
+            if (rest.length === 0) {
+                return result;
+            }
+
+            return helper(rest, [], result);
+        } else {
+            const [newFirst, ...newRest] = first.concat(rest);
+            return helper(newFirst, newRest, result);
+        }
+    }
+
+    return helper(arr, [], []);
+}
+```
+
 ### 类与原型链
 
 1.组合继承：
 
-```
+```js
 function Parent (name) {
   this.name = name;
   this.colors = ['red', 'blue', 'green'];
@@ -264,7 +301,7 @@ Child.prototype = new Parent();
 
 4.斐波拉切数的尾调用优化递归版本：
 
-```
+```js
 // 求第 n 位斐波拉切数
 function fibbo(n, before = 0, temp = 1) {
     if (n <= 1) return temp;

@@ -247,6 +247,11 @@ flex-shrink: 定义了项目的缩小比例
 flex-basis: 项目占据的主轴空间
 flex: 是flex-grow, flex-shrink, flex-basis的简写
 align-self: 表示单个项目与其他项目的不一样的对齐方式
+
+flex: 0 1 auto: 当存在剩余空间的时候，不会放大；当空间不足的时候，会缩小
+flex: 1: 当存在剩余空间的时候，会放大（此时flex-basis为0%，在计算多余空间的时候，按父元素的0%计算）
+flex: auto: 当存在剩余空间的时候，会放大（此时flex-basis为auto）
+flex: none: 当空间不足的时候，不会缩小
 ```
 
 ### 回流和重绘
