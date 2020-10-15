@@ -151,26 +151,28 @@ ctx.restore();
 4.恢复 canvas 状态
 ```
 
-一般情况下，建议使用 requestAnimationFrame 绘制动画，基本代码如下：
+一般情况下，建议使用 requestAnimationFrame 绘制动画，requestAnimationFrame 的原理是告诉浏览器在下次重绘前使用执行的回调函数更新动画，所以为了持续更新动画，我们需要在回调函数里面继续调用 requestAnimationFrame。基本代码如下。
 
 ```js
 function draw() {
-    ctx.clearRect(0,0,300,300);
+  ctx.clearRect(0,0,300,300);
 
-    ctx.save();
-    // 绘制第一个部分
-    ctx.restore();
+  ctx.save();
+  // 绘制第一个部分
+  ctx.restore();
 
-    ctx.save();
-    // 绘制第二个部分
-    ctx.restore();
+  ctx.save();
+  // 绘制第二个部分
+  ctx.restore();
 
-    ctx.save();
-    // 绘制第三个部分
-    ctx.restore();
+  ctx.save();
+  // 绘制第三个部分
+  ctx.restore();
 
-    window.requestAnimationFrame(draw);
+  window.requestAnimationFrame(draw);
 }
+
+draw();
 ```
 
 注意：我们可以使用各种公式来设置随时间变化的位置，从而来实现高级动画。

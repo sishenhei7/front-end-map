@@ -192,6 +192,24 @@ function flatten(arr) {
     return result;
 }
 
+// while 形式，dfs，手动维护一个栈
+function flatten_while(arr) {
+    const result = [];
+    const stack = [...arr];
+
+    while (stack.length > 0) {
+        const node = stack.shift();
+
+        if (Array.isArray(node)) {
+            stack.unshift(...node);
+        } else {
+            result.push(node);
+        }
+    }
+
+    return result;
+}
+
 // 使用tostring
 function flatten_new(arr) {
     return arr.toString().split(',');
