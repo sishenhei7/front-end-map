@@ -102,6 +102,16 @@ Req.responseType = 'json';
 Req.send();
 ```
 
+15.preload 和 prefetch:
+
+```
+preload: 表示提前加载某些资源，防止在需要执行的时候再加载，从而发生阻塞。此时资源一定会加载。
+
+prefetch: 表示下一页可能会用到这些资源，在浏览器 idle 的时候再加载。此时资源不一定会加载。
+
+注意: ssr项目里面本页的资源全部使用preload，而动态路由则全部使用prefetch
+```
+
 ### 函数式
 
 1.高阶函数：一个函数可以接受另一个函数作为参数或者返回值为一个函数的函数。
@@ -234,6 +244,52 @@ function flaten_tail(arr) {
 
     return helper(arr, [], []);
 }
+```
+
+7.手写简易promise:
+
+```js
+class MyPromise {
+    constructor(fn) {
+        this.cbs = [];
+        fn(this.resolve.bind(this));
+    }
+
+    resolve(value) {
+        this.data = value;
+        this.cbs.forEach(cb => cb(value));
+    }
+
+    then(onResolved) {
+        return new MyPromise((resolve) => {
+            this.cbs.push(() => {
+                const res = onResolved(this.data);
+
+                if (res instanceof MyPromise) {
+                    res.then(resolve);
+                } else {
+                    resolve(res);
+                }
+            });
+        });
+    }
+}
+
+// test
+new MyPromise((resolve) => {
+    setTimeout(() => {
+        console.log('start');
+        resolve(2);
+    }, 1000);
+}).then((res) => {
+    console.log('first then');
+    return new MyPromise((resolve) => {
+        setTimeout(() => {
+            console.log('first promise');
+            resolve(3);
+        }, 1000);
+    })
+}).then(console.log);
 ```
 
 ### 类与原型链
