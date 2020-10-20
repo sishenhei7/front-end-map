@@ -69,10 +69,15 @@ angular: 有一整套的开发流和规范，比较适合大型项目，对低�
 14.前端错误上报：
 
 ```
-捕获全局错误：使用 window.onerror
+捕获全局错误和资源加载错误：使用 window.addEventListener('error')
 捕获vue错误：使用 vue.config.errorHandler
+捕获未处理的promise错误：使用window.addEventListener('unhandledRejection')
+fetch 和 xhr错误：改写 fetch 方法和 xhr 方法
 上报内容：使用 performance api 获取
 上报方法：使用 navigator.sendBeacon 方法
+
+改写 fetch 方法：增加then和catch即可
+改写 xhr 方法：主要是改写 xhr 的 send 方法，在里面增加监听 error、load 和 abort 的事件
 ```
 
 15.nexttick 的作用和原理：
