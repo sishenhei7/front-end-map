@@ -418,6 +418,22 @@ HttpOnly: 限制 js 能否获取 cookie
 解决方法：并发连接（浏览器支持并发多个连接，但同一域名下的并发连接有数量限制）、域名分片（把资源的域名分为多个二级域名，指向原本的同一资源，这样就避免了同一域名的并发连接数量）、http2（多路复用）
 ```
 
+什么是 http:
+
+```
+定义：http全称超文本传输协议，它是基于 tcp 协议上的应用层协议，定义了数据传输和连接方式的规范。
+组成：它由起始行、头部和实体组成
+起始行：起始行有http版本、状态码和原因组成
+头部：头部有各种首部字段，主要有请求首部、响应首部、实体首部、cookie首部和其它首部
+实体：一般是数据
+
+请求首部：描述能接受什么文件（accept、accept-charset、accept-encoding、accept-language），鉴权信息（authorization），缓存情况（if-modified-since、if-none-match），其它信息（host、referer、user-agent）
+响应首部：描述服务器的信息（age、server、location）
+实体首部：allow、content-encoding、content-type、content-language、content-length、last-modified、etag
+cookie首部：set-cookie、cookie
+其它首部：x-
+```
+
 ### 响应状态码
 
 1xx:
