@@ -256,8 +256,10 @@ class MyPromise {
     }
 
     resolve(value) {
-        this.data = value;
-        this.cbs.forEach(cb => cb(value));
+        setTimeout(() => {
+            this.data = value;
+            this.cbs.forEach(cb => cb(value));
+        });
     }
 
     then(onResolved) {
