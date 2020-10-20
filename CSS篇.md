@@ -257,7 +257,7 @@ flex: none: 当空间不足的时候，不会缩小
 ### 回流和重绘
 
 ```
-回流：浏览器会把 html 解析成 dom，把 css 解析成 cssdom，他们一起就叫做 render tree。当render tree 改变的时候，就会触发回流。比如说：改变元素的大小、改变元素的内容、改变窗口的大小等，他们会触发render tree的改变。
+回流：浏览器会把 html 解析成 dom树，把 css 解析成 cssdom树，他们一起就叫做 render tree。当render tree 改变的时候，就会触发回流。比如说：改变元素的大小、改变元素的内容、改变窗口的大小等，他们会触发render tree的改变。
 
 重绘：生成 render tree 之后浏览器就会把它绘制到 ui 上面去，如果render tree没有改变，但是其他css改变的时候，就会触发重新绘制，叫做重绘。比如说：颜色、背景图、透明度等。
 ```
