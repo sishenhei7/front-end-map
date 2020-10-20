@@ -238,6 +238,13 @@ node、nginx等代理：服务器没有同源策略
 postmessage：主要用于页面之间的通信，页面的所属域不同
 ```
 
+什么是cors: 跨域资源共享，允许浏览器向跨域服务器发出 http 请求，从而克服跨域问题。
+
+```
+1.浏览器会自动向请求添加 origin 字段，表明当前请求来源
+2.服务器端需要设置响应头：access-control-allow-methods、access-control-allow-headers、access-control-allow-origin字段，指定允许的方法、头部、源等信息
+```
+
 ### http 协议
 
 ```
