@@ -86,3 +86,22 @@ fetch 和 xhr错误：改写 fetch 方法和 xhr 方法
 作用：把回调放到异步队列里面去更新。最常用的场景是，把 dom 更新后才进行的操作放到 nexttick 里面去。
 原理：promise -> mutationObserver -> setImmediate -> setTimeout
 ```
+
+16.performance api 主要有 2 个用途，一个是做性能监控，另一个是检查代码运行时间：
+
+```
+性能监控：performance可以得出很多信息：文档load、ready信息，content load信息，tcp连接时间信息，dns查找信息等等
+
+代码运行时间：使用performance.mark和performance.measure api
+```
+
+17.检测代码运行时间：
+
+```js
+performance.mark('setTimeout-start');
+
+setTimeout(() => {
+    performance.mark('setTimeout-end');
+    performance.measure('measure', 'setTimeout-start', 'setTimeout-end');
+})
+```

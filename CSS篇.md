@@ -261,3 +261,11 @@ flex: none: 当空间不足的时候，不会缩小
 
 重绘：生成 render tree 之后浏览器就会把它绘制到 ui 上面去，如果render tree没有改变，但是其他css改变的时候，就会触发重新绘制，叫做重绘。比如说：颜色、背景图、透明度等。
 ```
+
+### 开启 GPU 加速
+
+```
+方法一：transform: translateZ(0);
+
+方法二：will-change: transform;
+```

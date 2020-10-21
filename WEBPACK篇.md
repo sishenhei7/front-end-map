@@ -183,4 +183,6 @@ sourcemap：使用合理的sourcemap
 
 3.plugin 的原理：plugin 其实就是一个有 apply 方法的类。在这个方法里面使用 tap 或者 tapAsync 进入 webpack 相应的事件钩子，然后使用 webpack 的内部数据做一些处理，在处理完之后调用 webpack 的 callback 方法即可。
 
+### 前端工程
 
+1.前端工程包括：webpack、git提交规范（husky、conventional-changelog）、代码规范（ts、eslint、prettier）、CI（github actions）、test（e2e test、unit test）、docs（vuepress）
