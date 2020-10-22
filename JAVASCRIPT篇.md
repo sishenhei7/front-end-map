@@ -263,27 +263,48 @@ function flaten_tail(arr) {
 
 ```js
 class MyPromise {
-    constructor(fn) {
-        this.cbs = [];
-        fn(this.resolve.bind(this));
+    constructor(executor) {
+        this.callbacks = [];
+        executor(this.resolve.bind(this), this.reject.bind(this));
     }
 
     resolve(value) {
         setTimeout(() => {
             this.data = value;
-            this.cbs.forEach(cb => cb(value));
+            this.callbacks.forEach(callback => callback.onResolved(value));
         });
     }
 
-    then(onResolved) {
-        return new MyPromise((resolve) => {
-            this.cbs.push(() => {
-                const res = onResolved(this.data);
+    reject(value) {
+        setTimeout(() => {
+            this.data = value;
+            this.callbacks.forEach(callback => callback.onRejected(value));
+        });
+    }
 
-                if (res instanceof MyPromise) {
-                    res.then(resolve);
-                } else {
-                    resolve(res);
+    then(onResolved, onRejected) {
+        onResolved = typeof onResolved === 'function' ? onResolved : res => res;
+        onRejected = typeof onRejected === 'function' ? onRejected : err => { throw(err) };
+
+        return new MyPromise((resolve, reject) => {
+            this.callbacks.push({
+                onResolved: () => {
+                    const res = onResolved(this.data);
+
+                    if (res instanceof MyPromise) {
+                        res.then(resolve, reject);
+                    } else {
+                        resolve(res);
+                    }
+                },
+                onRejected: () => {
+                    const res = onRejected(this.data);
+
+                    if (res instanceof MyPromise) {
+                        res.then(resolve, reject);
+                    } else {
+                        reject(res);
+                    }
                 }
             });
         });
@@ -304,7 +325,9 @@ new MyPromise((resolve) => {
             resolve(3);
         }, 1000);
     })
-}).then(console.log);
+}).then(res => console.log(res));
+
+// 注意：promise 和回调最本质的区别并不仅仅是解决了回调地狱，而是控制反转和信任度的问题。控制反转指的是promise在每一次链式调用中返回了一个新的promise，把执行权交给了下一个promise；信任度指的是在promise内部有pending、resolved、rejected状态，一旦到达resolved状态或者rejected状态之后就不会改变了，并且外部也不能改变这些状态。
 ```
 
 ### 类与原型链
