@@ -50,6 +50,13 @@ vw：
 
 ### 居中
 
+字体：
+
+```
+text-align: center;
+line-height: xxxpx;
+```
+
 行内元素：
 
 ```
@@ -63,18 +70,27 @@ vertical-align: center;
 固定宽高：
 
 ```
+// 方法一：
 width: 200px;
 height: 100px;
 left: 50%;
 top: 50%;
 margin-left: -100px;
 margin-top: -50px;
+
+// 方法二
+width: 200px;
+height: 100px;
+left: calc(50% - 100px);
+top: calc(50% - 50px);
 ```
 
 宽高不定：
 
 ```
 // 使用 transform
+top: 50%;
+left: 50%;
 transform: translate(-50%, -50%);
 
 // 使用 table 布局

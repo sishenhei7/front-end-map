@@ -271,7 +271,7 @@ public: 表示客户端和代理服务器都可以缓存
 private：表示只有客户端可以缓存，默认值
 no-cache: 表示使用协商缓存来决定
 no-store: 表示既不使用强制缓存，也不使用协商缓存
-max-age=xxx：缓存内容将在xxx秒后失效
+max-age=xxx：缓存内容将在xxx秒后失效（xxx秒内直接使用缓存，超过xxx秒则使用协商缓存）
 ```
 
 头部通用字段：Connection
