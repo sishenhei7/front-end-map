@@ -125,6 +125,23 @@ prefetch: 表示下一页可能会用到这些资源，在浏览器 idle 的时�
 
 18.箭头函数和一般函数的区别：捕获外部的this、内部没有 arguments、不能使用 call、bind、apply 等、不能作为构造函数、内部不能使用 yield。
 
+19.new 发生了什么：
+
+```
+1.创建一个空对象
+2.设置这个对象的原型链
+3.初始化里面的属性和方法
+4.把this指向这个对象并返回，如果有返回值且是一个对象，则返回对象。
+```
+
+20.for-of 和 for-in 的区别：
+
+```
+for of: 能遍历有迭代器对象的集合，比如数组、字符串、map等
+
+for in: 一般用来遍历对象，但是会查找原型链上面的属性，一般用 object.keys 或 hasOwnProperty 解决
+```
+
 ### 函数式
 
 1.高阶函数：一个函数可以接受另一个函数作为参数或者返回值为一个函数的函数。
@@ -309,6 +326,10 @@ class MyPromise {
             });
         });
     }
+
+    catch(onReject) {
+        return this.then(undefined, onReject);
+    }
 }
 
 // test
@@ -317,15 +338,19 @@ new MyPromise((resolve) => {
         console.log('start');
         resolve(2);
     }, 1000);
-}).then((res) => {
-    console.log('first then');
-    return new MyPromise((resolve) => {
-        setTimeout(() => {
-            console.log('first promise');
-            resolve(3);
-        }, 1000);
+})
+    .then((res) => {
+        console.log('first then');
+        return new MyPromise((resolve) => {
+            setTimeout(() => {
+                console.log('first promise');
+                resolve(3);
+            }, 1000);
+        })
     })
-}).then(res => console.log(res));
+    .then(res => {console.log(res);})
+    .then(() => {throw 2;})
+    .catch(err => {console.log(`throw ${err}`);});
 
 // 注意：promise 和回调最本质的区别并不仅仅是解决了回调地狱，而是控制反转和信任度的问题。控制反转指的是promise在每一次链式调用中返回了一个新的promise，把执行权交给了下一个promise；信任度指的是在promise内部有pending、resolved、rejected状态，一旦到达resolved状态或者rejected状态之后就不会改变了，并且外部也不能改变这些状态。
 ```
