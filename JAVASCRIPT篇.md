@@ -330,6 +330,14 @@ new MyPromise((resolve) => {
 // 注意：promise 和回调最本质的区别并不仅仅是解决了回调地狱，而是控制反转和信任度的问题。控制反转指的是promise在每一次链式调用中返回了一个新的promise，把执行权交给了下一个promise；信任度指的是在promise内部有pending、resolved、rejected状态，一旦到达resolved状态或者rejected状态之后就不会改变了，并且外部也不能改变这些状态。
 ```
 
+8.手写 bind:
+
+```js
+Function.prototype.myBind = function bind(that, ...args) {
+    return (...argsNew) => this.call(that, ...args, ...argsNew);
+}
+```
+
 ### 类与原型链
 
 1.组合继承：
@@ -365,7 +373,7 @@ Function Child(name, age) {
 Child.prototype = new Parent();
 ```
 
-2.原型链：构造函数有一个原型对象prototype，它的实例有一个属性__proto__就指向这个原型对象，而我们在组合继承当中，这个原型对象prototype又是另一个构造函数的实例，所以它也有一个__proto__属性，指向更上层的原型对象，就这样一直指向Object为止。
+2.原型链：构造函数的实例有一个__proto__对象，指向它的原型，和构造函数的prototype的指向相同。当一个对象在查找一个属性的时候，自身没有就会向它的__proto__对象查找，如果还没有，就向原型的原型查找，知道查找到 object 的原型为止，这也就形成了原型链。
 
 3.构造函数的prototype都有一个constructor属性，它指向这个构造函数，所以可以通过这个来判断类与实例的关系，但是constructor属性是可以被重写的，所以我们一般用instanceof来判断类与实例的关系。
 

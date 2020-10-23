@@ -105,3 +105,34 @@ setTimeout(() => {
     performance.measure('measure', 'setTimeout-start', 'setTimeout-end');
 })
 ```
+
+18.vue 的响应式数据变更到组件渲染的流程：
+
+```
+1.响应数据的改变会让setter方法里面的watcher进行更新，其中有一个watcher就是当前组件vm的watcher。
+2.vm 的 watcher 在更新的时候会把自己放到一个更新队列里面去，在下一个nextTick的时候更新。
+3.vm 的 watcher 在更新的时候会先用 render 方法生成 vnode，然后用 update 方法进行更新，其实就是执行 patch。
+4.在 patch 的时候，先判断有没有新旧vnode，只有新vnode那就表示是第一次更新，直接生成元素即可；如果只有旧vnode那就表示是要删除节点。然后判断新旧vnode是否一样，如果不一样就直接用新vnode生成新元素；如果一样则进行patchVnode。
+5.patchVnode会先判断是不是相同的vnode，相同则直接返回；然后判断是否是静态节点或文字节点，进行对应的修改；最后对新老节点的children进行diff算法更新。（使用updateChildren进行递归更新）
+```
+
+19.客户端激活的过程：
+
+```
+1.首先会使用 hydrate 对 html 和 vnode 进行比较判断能否进行激活。
+2.能进行激活的话，就使用新 vnode 进行激活，并返回服务端传来的 html
+3.不能进行激活的话，就生成一个空的vnode并渲染上去。
+```
+
+20.什么是 hippy：是一个跨平台的前端框架，原生支持 react 和 vue。
+
+21.什么是jsbridge: 是 js 和 native 之间的桥梁，主要用于做混合开发。
+
+22.vue 和 小程序有哪些区别：
+
+```
+1.生命周期：onlaunch、onShow、onHide、onLoad、onShow、onReady、onHide、onUnload
+2.小程序使用 setState
+```
+
+23.

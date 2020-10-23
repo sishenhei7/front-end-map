@@ -137,7 +137,7 @@ http/1.1：可以持久连接，但是必须先进先出（浏览器有并发限
 ### https 协议
 
 ```
-定义：本质上还是 http 协议，只不过把下层的 tcp/ip 协议换成了 ssl/tls
+定义：本质上还是 http 协议，只不过通过 ssl/tls 进行了加密处理
 ```
 
 对称加密：
@@ -243,6 +243,8 @@ postmessage：主要用于页面之间的通信，页面的所属域不同
 ```
 1.浏览器会自动向请求添加 origin 字段，表明当前请求来源
 2.服务器端需要设置响应头：access-control-allow-methods、access-control-allow-headers、access-control-allow-origin字段，指定允许的方法、头部、源等信息
+3.简单请求是 head、get、post 这三种之一，请求头信息不超过 accept、accept-language等字段
+4.非简单请求在请求之前会使用option进行一次预检。
 ```
 
 ### http 协议
@@ -440,6 +442,8 @@ HttpOnly: 限制 js 能否获取 cookie
 cookie首部：set-cookie、cookie
 其它首部：x-
 ```
+
+cookie 有哪些字段：name、value、domain、path、expires、http、secure、samesite
 
 ### 响应状态码
 
