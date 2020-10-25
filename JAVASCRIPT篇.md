@@ -376,14 +376,15 @@ Parent.prototype.getName = function () { return this.name; }
 
 // 原型链继承
 // 能够继承父类的所有原型，但是继承不了属性，同时也会把父类的属性和方法也复制过来到原型链里面
-Function Child1(name, age) {
+function Child1(name, age) {
     this.age = age;
 }
 Child1.prototype = new Parent();
+Child1.prototype.constructor = Child1;
 
 // 构造函数继承
 // 可以继承父类的属性，但是继承不了 prototype
-Function Child2(name，age) {
+function Child2(name，age) {
     Parent.call(this, name);
     this.age = age;
 }
@@ -391,7 +392,7 @@ Function Child2(name，age) {
 // 组合继承
 // 把上面结合起来
 // 改进：Child.prototype = Object.create(Parent.prototype);
-Function Child(name, age) {
+function Child(name, age) {
     Parent.call(this, name);
     this.age = age;
 }
