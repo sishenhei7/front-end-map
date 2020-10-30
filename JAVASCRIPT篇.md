@@ -352,7 +352,7 @@ new MyPromise((resolve) => {
     .then(() => {throw 2;})
     .catch(err => {console.log(`throw ${err}`);});
 
-// 注意：promise 和回调最本质的区别并不仅仅是解决了回调地狱，而是控制反转和信任度的问题。控制反转指的是promise在每一次链式调用中返回了一个新的promise，把执行权交给了下一个promise；信任度指的是在promise内部有pending、resolved、rejected状态，一旦到达resolved状态或者rejected状态之后就不会改变了，并且外部也不能改变这些状态。
+// 注意：promise 和回调最本质的区别并不仅仅是解决了回调地狱，而是控制反转和信任度的问题。控制反转指的是promise在每一次链式调用中返回了一个新的promise，把执行权交给了下一个promise；信任度指的是在promise内部有pending、fulfilled、rejected状态，一旦到达fulfilled状态或者rejected状态之后就不会改变了，并且外部也不能改变这些状态。
 ```
 
 8.手写 bind:
