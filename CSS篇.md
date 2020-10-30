@@ -284,6 +284,10 @@ flex: none: 当空间不足的时候，不会缩小
 方法一：transform: translateZ(0);
 
 方法二：will-change: transform;
+
+方法三：transform: rotateZ(360deg);
+
+方法四：transform: translate3D(10px, 10px, 0);
 ```
 
 ### postcss
