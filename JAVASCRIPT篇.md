@@ -183,13 +183,13 @@ let memorize = (func, content) => {
 5.手写 promise.all 和 promise.race：
 
 ```js
-Promise.prototype.all = function (iterator) {
+Promise.all = function (iterator) {
     let num = 0;
     const result = [];
     const len = iterator.length;
 
     return new Promise((resolve, reject) => {
-        for (item in iterator) {
+        for (item of iterator) {
             Promise.resolve(item)
                 .then((res) => {
                     num += 1;
@@ -206,7 +206,7 @@ Promise.prototype.all = function (iterator) {
     });
 }
 
-Promise.prototype.race = function (iterator) {
+Promise.race = function (iterator) {
     return new Promise((resolve, reject) => {
         for (item in iterator) {
             Promise.resolve(item)
