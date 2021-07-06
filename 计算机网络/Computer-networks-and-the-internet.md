@@ -19,3 +19,20 @@
 6. A satellite link can be used to connect a residence to the internet at the speed of more than 1 Mbps.
 7. Home access networks: DSL、Cable、FTTH、Dial-up、Satellite. Enterprise access: Ethernet and Wifi.
 8. Phisycal media fall into two categories: guided media and unguided media. Guided media includes copper wire、cable and fiber. Unguided media includes terrestrial radio channels and satellite  radio channels.
+
+## the network core
+
+1. The network core: the mesh of packet switches and links that interconnects the internet'send systems.
+2. Most packet switches use store-and-forward transmission at the inputs to the links. Store-and-forward means that the switch must receive the entire packet before it can begin to transmit the first bit of the packet.
+3. The packet switch has an output buffer. Thus, in addition to the store-and-forward delays, packets suffer output buffer queuing delays. In this case, packet loss will occur: either the arriving packet or the already-queued packet will be dropped.
+4. Each rotuer has a forwarding table that maps destination address to that router's outbound links. The internet has a number of special routing protocols that are used to automatically set the forwarding tables.
+5. There are two fundamental approaches to moving data through a network of links and switches: circuit switching and packet switching. In circuit switching networks, the paths are reserved for the duration of the communication session between the end systems.
+6. Traditional telephone networks are examples of circuit switching networks.
+7. The internet makes its best effort to deliver packets in a timely manner, but it does not make any guarantees.
+8. A circuit in a link is implemented with either frequency-division multiplexing(FDM) or time-division multiplexing(TDM). With FDM, the frequency spectrum of a link is divided up among the connections established across the link. For a TDM link, time is divided into frames of fixed duration, and each frame is divided into a fixed number of time slots.
+9. The access ISPs themselves must be interconnected. This is done by creating a network of networks. Understanding this phrase is the key to understanding the internet.
+10. Network structure 1, interconnects all of the access ISPs with a single global transit ISP. Network structure 2, consists of hundreds of thousands of access ISPs and multiple global transit ISPs. Network structure 3, in any given region, there may be a regional ISP to which the access ISPs in the region connect. Network structure 4, we must add points of presence(PoPs), multi-homing, peering, and internet exchange points(IXPs) to the hierarchy. Network structure 5, which is the internet today, adds content-provider networks to the hierarchy. Google is currently one of the leading examples of such a content-provider network.
+
+
+
+
