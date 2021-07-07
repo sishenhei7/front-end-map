@@ -33,6 +33,20 @@
 9. The access ISPs themselves must be interconnected. This is done by creating a network of networks. Understanding this phrase is the key to understanding the internet.
 10. Network structure 1, interconnects all of the access ISPs with a single global transit ISP. Network structure 2, consists of hundreds of thousands of access ISPs and multiple global transit ISPs. Network structure 3, in any given region, there may be a regional ISP to which the access ISPs in the region connect. Network structure 4, we must add points of presence(PoPs), multi-homing, peering, and internet exchange points(IXPs) to the hierarchy. Network structure 5, which is the internet today, adds content-provider networks to the hierarchy. Google is currently one of the leading examples of such a content-provider network.
 
+## delay, loss and thoughput in packet-switchednetworks
 
+1. The most important delays are (1)nodal processing delay, (2)queuing delay, (3)transmission delay, (4)propagation delay. Togather, they give a total nodal delay.
+2. The time required to examine the packet's header and determine where to direct the packet is part of the processing delay.
+3. At the queue, the packet expriences a queuing delay as it waits to be transmitted onto the link.
+4. In packet-switched networks, our packet can be transmitted only after all the packets that have arrived before it have been transmitted.
+5. The time required to propagate from the beginning of the link to router B is the propagation delay.
+6. Our discussion up to this point has focused on the nodal delay, that is, the delay at a single router. Whereas an end to end delay has N routers.
+7. A packet can arrive to find a full queue. with no place to store such a packet, a router will drop that packet; that is, the packet will be lost.
+8. The instantaneous throughput at any instant of time is the rate at which Host B is receiving the file. It is the transmission rate of the bottleneck link.
+
+## protocal layers and their service model
+
+1. One way to describe the airline system might be to describe the series of actions you take (or others take for you when you fly on an airline.
+2.
 
 
