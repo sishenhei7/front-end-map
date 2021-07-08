@@ -46,7 +46,18 @@
 
 ## protocal layers and their service model
 
-1. One way to describe the airline system might be to describe the series of actions you take (or others take for you when you fly on an airline.
-2.
+1. One way to describe the airline system might be to describe the series of actions you take (or others take for you when you fly on an airline. A layered architecture allows us to discuss a well-defined, specific part of a large and complex system.
+2. Each Internet layer provides its service by (1)performing certain actions within that layer and by (2)using the services of the layer directly above it.
+3. Two drawbacks of layering are (1)one layer may duplicate lower-layer functionality and (2)functionality at one layer may need information that is present only in another layer.
+4. The application layer is where network applications and their application-layer protocols reside. We'll refer to this packet of information at the application layer as a message.
+5. The internet's transport layer transports application-layer messages between application endpoints. We'll refer to a transport-layer packet as a segment.
+6. The Internet's network layer is responsible for moving network-layer known as datagrams from one host to another. It contains both the IP protocol and numerous routing protocols.
+7. To move an entire packet from one node(host or router) to the next node in the route, the network layer relies on the services of the link layer. Examples of link-layer protocols include Ethernet, Wifi, and the cable access network's DOCSIS protocol.
+8. The job of the physical layer is to move the individual bits within the frame from one node to another.
+
+## networks under attack
+
+1. The bad guys can (1)put malware in your host via the internet like viruses and worms. (2)attack servers and network infrastructure, like Dos attack: vulnerablity attack, bandwidth flooding, connection flooding. (3)can sniff packets. (4)can masquerade as someone you trust.
+
 
 
