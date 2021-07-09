@@ -10,3 +10,23 @@
 6. Applications that have throughput requirements are said to be bandwith-sensitive applications. Elastic applications can make use of as much, as little, throughput as happens to be available.
 7. The internet(and more generally, TCP/IP networks) makes two transport protocols available to applications, UDP and TCP.
 8. In our brief description of TCP and UDP, conspicuously missing was any mention of throughput and timing guarentees. But today's internet can often provide satisfatory service to time-sensitive applications, but it cannot provide any timing or throughput guarentees.
+
+## The Web and Http
+
+1. Although HTTP uses persistent connections in its default mode, HTTP clients and servers can be configured to use non-persistent connections instead.
+2. The round trip time(RTT) is the time it takes for a small packet to travel from client to server and then back to the client.
+3. Non-persistent connections have some shortcomings: (1)For too many connections, TCP buffers must be allocated and TCP variables must be kept in both the client and server. (2)Each object suffers a delivery delay of two RTTs: one to establish the TCP connection and one RTT to request and receive an object.
+4. HTTP is written in ordinary ASCII text.
+5. A request message includes a request line, some header lines and an entity body.
+6. A response message includes an initial status line, some header lines and an entity body.
+7. A HTTP request meassage is called conditional GET message if (1)the request message uses the GET method and (2)the request message includes an If-modified-since header line.
+
+## Electronic Mail in the Internet
+
+1. If Alice's server cannot deliver mail to Bob's server, Alice's server holds the message in a message queue and attempts to transfer the message later.
+2.
+
+
+
+
+
