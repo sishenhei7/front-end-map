@@ -24,7 +24,14 @@
 ## Electronic Mail in the Internet
 
 1. If Alice's server cannot deliver mail to Bob's server, Alice's server holds the message in a message queue and attempts to transfer the message later.
-2.
+2. It is important to observe that SMTP does not normally use intermediate mail servers for sending mail, even when the two mail servers are located at opposite ends of the world.
+3. We mention here that SMTP uses persistent connections: if the sending mail server has several messages to send to the same receiving mail server, it can send all of the messages over the same TCP connections.
+4. There are some differences between HTTP and SMTP: (1)HTTP is mainly a pull protocol; SMTP is primarily a push protocol. (2)SMTP requires each message, including the body of each message, to be in 7-bit ASCII format. (3)HTTP encapsulate each object in its HTTP response message; SMTP places all of the message's object to one message.
+5. SMTP is used to transfer mail from the user agent to the sender's mail server; SMTP is also used to transfer mail from the sender's mail server to the recipient's mail server; A mail access protocol such as POP3、IMAP is used to transfer the recipient's mail server to the recipient's user client.
+6. With the TCP connection established, POP3 progress through three phrases: authorization, transaction and update.
+7. A user agent using POP3 can often be configured to 'download and delete' or to 'download and keep'.
+8. POP3 does not provide any means for a user to create remote folders and assign messages to folders. Whereas the IMAP protocol can. Another feature of IMAP is that it has commands that permit a user agent to obtain components of messages.
+9. More and more users today are sending and accessing their e-mail through their Web browsers.
 
 
 
