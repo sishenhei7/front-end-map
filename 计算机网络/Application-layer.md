@@ -33,7 +33,16 @@
 8. POP3 does not provide any means for a user to create remote folders and assign messages to folders. Whereas the IMAP protocol can. Another feature of IMAP is that it has commands that permit a user agent to obtain components of messages.
 9. More and more users today are sending and accessing their e-mail through their Web browsers.
 
+## DNS: The internet's directory service
 
+1. The DNS is (1)a distributed database implemented in a hierarchy of DNS servers. (2)an application-layer protocol that allows hosts to query the distributed database. The DNS protocol runs over UDP and uses port 53.
+2. DNS provides a few other important services in addition to translating hostnames to IP addresses: (1)host aliasing. (2)mail server aliasing. (3)load distribution: using DNS rotating.
+3. To a first approximation, there are three classes of DNS servers: root DNS servers, top-level domain(TLD) DNS servers and authoritative DNS servers. There is another DNS server called the local DNS server.
+4. When a host makes a DNS query, the query is sent to the local DNS server, which acts a proxy, forwarding the query into the DNS server hierachy: (1)The host first sends a DNS query message to its local DNS server. (2)The local DNS server forwards the query message to a root DNS server. (3)The local DNS server then resends the query message to one of the TLD servers. (4)The local DNS server resends the query message to the authoritative DNS server to get ip address. Note that in this process, eight DNS messages are sent.
+5. A DNS resource record is a four-tuple: (Name, Value, Type, TTL)
+6. TTL is the time to live of the resource record; it determines when a resource should be removed from a cache.
+7. When Type=NS, then Name is a domain and Value is the hostname of an authoritative DNS server that knows how to obtain the IP address for hosts in the domain.
+8. The nslookup program can send DNS messages.
 
 
 
