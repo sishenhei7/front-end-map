@@ -44,5 +44,16 @@
 7. When Type=NS, then Name is a domain and Value is the hostname of an authoritative DNS server that knows how to obtain the IP address for hosts in the domain.
 8. The nslookup program can send DNS messages.
 
+## Peer-to-Peer File Distribution
+
+1. The distribution time is the time it takes to get a copy of the file to all N peers. In client-server distribution, the distribution time increases linearly with the number of peers N; whereas applications with the P2P architecture can be self-scaling, which is a direct consequence of peers being distributors as well as consumers of bits.
+2. In BitTorrent lingo, the collection of all peers participating in the distribution of a particular file is called a torrent. Peers in a torrent download equal-size chunks of the file from one another, with a typical size of 256 KBytes.
+3. Each torrent has an infrastructure node called tracker. When a peer joins a torrent, it registers itself with the tracker and periodically informs the tracker that it is still in the torrent. In this manner, the tracker keeps track of the peers that are participating in the torrent.
+4. To determine which to request, Alice uses a technique called rarest first. The idea is to determine, from among the chunks she does not have, the chunks that are the rarest among her neighbors and then request those rarest chunks first.
+5. To determine which request she respond to, the basic idea is that Alice gives priority that are currently supplying her data at the highest rate.
+6. Importantly, every 30 seconds, she also picks one additional neighbour at random and send it chunks, which is refered to as tit-for-tat.
+
+## Video Streaming and Content Distribution Networks
+
 
 
