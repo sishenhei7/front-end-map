@@ -55,5 +55,20 @@
 
 ## Video Streaming and Content Distribution Networks
 
+1. A video is a sequence of images, typically being displayed at a constant rate, for example, at 24 or 30 images per second. An important characteristic of video is that it can be compressed, thereby trading off video quality with bit rate.
+2. From a networking perspective, perhaps the most salient characteristic of video is its high bit rate.
+3. HTTP streaming has a major shortcoming: All clients receive the same encoding of the video, despite the large variations in the amount of bandwidth available to a client, both across different clients and also over time for the same client.
+4. In DASH, the video is encoded into several different versions, with each version having a different bit rate and, correspondingly, a different quality level. When the amount of available bandwidth is high, the client naturally selects chunks from a high-rate version; and when the available bandwidth is low, it naturally selects from a low-rate version.
+5. In fact, many CDNs do not push videos to their clusters but instead use a simple pull strategy. Most CDNs take advantage of DNS to intercept and redirect requests.
+6. At the core of any CDN deployment is a cluster selection strategy, that is, a mechanism for dynamically directing clients to a server cluster or a data center within the CDN.
+7. YouTube does not employ adaptive streaming such as DASH, but instead requires the user to manually select a version. It uses the HTTP byte range request to limit the flow of transmitted data after a target amount of video is prefetched.
+8. Kankan uses P2P delivery instead of client-server delivery. P2P video streaming is very similar to BitTorrent file downloading. When a peer wants to see a video, it contacts a tracker to discover other peers in the system that have a copy of that video.
+9. Recently, Kankan has migrated to a hybrid CDN-P2P streaming system.
 
+## Socket programming: Creating Network Applications
+
+1. A typical network application consists of a pair of programs: a client program and a server program, residing in two different end systems. When these two programs are executed, a client process and a server process are created, and these processes communicate with each other by reading from, and writing to, sockets.
+2. There are two type of network applications: (1)One type is an implementation whose operation is specified in a protocol standard, such as an RFC. (2)The other type of network is a proprietary network application. In this case the client and server programs employ an application-layer protocol that has not been openly published in an RFC.
+3. When a socket is created, an identifier, called a port number, is assigned to it. So, as you might expect, the packet's destination address all includes the socket's port number.
+4. Unlike UDP, TCP is a connection-oriented protocol. This means that before the client and server can start to send data to each other, they first need to handshake and establish a TCP connection.
 
