@@ -20,3 +20,19 @@
 7. One subtle different between a TCP socket and a UDP socket is that a TCP socket is identified by a four-tuple: source IP address, source port number, destination IP address, destination port number.
 8. If the client and server are using persistant HTTP, then throughout the duration of the persistant connection the client and server exchange HTTP messages via the same server socket. However, if the client and server use non-ponsistent HTTP, then a new TCP connection is created and closed for every request/response, and hence a new socket is created and later closed for every request/response.
 
+## Connectionless Transport: UDP
+
+1. At the very least, the transport layer has to provide a multiplex/demultipexing service in order to pass data between the network layer and the correct application-level process.
+2. Aside from the multipexing/demultiplexing function and sone light error checking, UDP adds nothing to IP.
+3. TCP maintains connection state in the end systems. This connection state includes receive and send buffers, congestion-control parameters, and sequence and acknoledgement number parameters.
+4. UDP is better suited for some application for these reasons: (1)Finer application-level control over what data is sent and when. (2)No connection establishment. (3)No connection state. (4)Small packet header overhead.
+5. Tt is possible for an application to have reliable data transfer when using UDP. This can be done if reliablity is built into the application itself, for example, by adding acknoledgement and retransmission mechanism.
+6. The UDP header has only four fields, each consisting of two bytes. They are source port, destination port, length and checksum.
+7. The UDP checksum provides for error detection. That is, the checksum is used to determine whether bits within the UDP segment have been altered as it move from source to destination. UDP at the sender side performs the 1s complement of the sum of all the 16-bit words in the segment, with any overflow encountered during the sum being wrapped around.
+8. Given that neither link-by-link reliability nor in-memory error detection is guarenteed, UDP must provide error detection at the transport layer. Although UDP provides error checking, it does not do anything to recover from error.
+
+
+
+
+
+
