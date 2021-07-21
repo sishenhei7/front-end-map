@@ -31,7 +31,16 @@
 7. The UDP checksum provides for error detection. That is, the checksum is used to determine whether bits within the UDP segment have been altered as it move from source to destination. UDP at the sender side performs the 1s complement of the sum of all the 16-bit words in the segment, with any overflow encountered during the sum being wrapped around.
 8. Given that neither link-by-link reliability nor in-memory error detection is guarenteed, UDP must provide error detection at the transport layer. Although UDP provides error checking, it does not do anything to recover from error.
 
+## Principles of Reliable data transfer
 
+1. Reliable data transfer is of central importance to networking.
+2. rdt1.0, the simplest case, in which the underlying channel is completely reliable: (1)there is no need for the receiver side to provide any feedback to the sender since nothing can go wrong. (2)there is no need for the receiver to ask the sender to slow down.
+3. rdt2.0, a more realistic model of the underlying channel is one in which bits in a packet may be corrupted.
+4. Acknowledgement messages allow the receiver to let the sender know what has been received correctly, and what has been received in error and thus need repeating.
+5. Fundamentally, these capabilities are required to handle the presence of bit errors: (1)Error detection. A mechanism is needed to allow the receiver to detect when bit errors has occured. (2)Receiver feedback. The only way for the sender to learn of the receiver's view of the world is for the receiver to provide explicit feedback to the sender. (3)Retransmission. A packet that is received in error at the receiver will be retransmitted by the sender.
+6. rdt2.0 is known as stop-and-wait protocol. But we haven't accounted for the possibility that the ACK or NAK packet counld be corrupted, and, how the protocol should recover from errors in ACK or NAK packets. A simple solution is to put a sequence number into the data packet, the receiver need only check this sequence number to determine whether or not the received packet is a retransmission.
+7. rdt3.0, the underlying channel can lose packet as well. So two additional concerns must now be addressed by the protocol: how to delect packet loss and what to do when packet loss occurs.
+8. The approach thus adopted in practice is for the sender to judiciously choose a time value such that packet loss is likely, although not guarenteed, to have happened. The sender will thus need to be able to (1) start the timer each time a packet, either a first-time packet or a retransmission packet, is sent, (2)respond to a timer interrupt, (3)stop the timer.
 
 
 
