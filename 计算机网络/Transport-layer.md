@@ -41,6 +41,16 @@
 6. rdt2.0 is known as stop-and-wait protocol. But we haven't accounted for the possibility that the ACK or NAK packet counld be corrupted, and, how the protocol should recover from errors in ACK or NAK packets. A simple solution is to put a sequence number into the data packet, the receiver need only check this sequence number to determine whether or not the received packet is a retransmission.
 7. rdt3.0, the underlying channel can lose packet as well. So two additional concerns must now be addressed by the protocol: how to delect packet loss and what to do when packet loss occurs.
 8. The approach thus adopted in practice is for the sender to judiciously choose a time value such that packet loss is likely, although not guarenteed, to have happened. The sender will thus need to be able to (1) start the timer each time a packet, either a first-time packet or a retransmission packet, is sent, (2)respond to a timer interrupt, (3)stop the timer.
+9. In our GBN protocol, an acknowledgement for a packet with sequence number n will be taken to be a cumulative acknoledgement, indicating that all packets with a sequence number up to and including n have been correctly received at the receiver.
+10. The receiver's actions in GBN are also simple. If a packet with sequence number n is received correctly and is in order, the receiver sends an Ack for packet n and delivers the data portion of the packet to the upper layer. In all other cases, the receiver discards the packet and resends an ACK for the most recently received in-order packet.
+11. In our GBN protocol, the receiver discards out-of-order packets. The advantage of this approach is the simplicity of receiving buffering: the receiver need not buffer any out-of-order packets
+12. The drawback of GBN may be that a single packet error can cause GBN to retransmit a large number of packets, many unnecessarily.
+13. As the name suggests, selective-repeat protocols avoid unnecessary retransmissions by having the sender retransmit only those packets that it suspects were received in error at the receiver.
+14. The SR receiver will acknowledge a correctly received packet whether or not it is in order. Out-of-order packets are buffered until any missing packets are received.
+15. It is important to note that in Step 2 in figure 3.25, the receiver reacknoledges(rather than ignores) already received packets with certain sequence numbers below the current window base.
+16. An important aspect of SR protocols is that the sender and receiver will not always have an identical view of what has been received correctly and what was not. For SR protocols, this means that the sender and receiver windows will not always coincide, which has important consequences.
+
+## Connection-Oriented transport: TCP
 
 
 
