@@ -52,6 +52,7 @@
 
 ## Connection-Oriented transport: TCP
 
-
+1. We'll see that in order to provide reliable data transfer, TCP relies on many of the underlying principles discussed in the previous section, including error detection, retransmissions, cumulative acknowledgement, timers, and header fields for sequence and acknowledgement numbers.
+2.
 
 
