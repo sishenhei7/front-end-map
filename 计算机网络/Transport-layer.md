@@ -53,6 +53,26 @@
 ## Connection-Oriented transport: TCP
 
 1. We'll see that in order to provide reliable data transfer, TCP relies on many of the underlying principles discussed in the previous section, including error detection, retransmissions, cumulative acknowledgement, timers, and header fields for sequence and acknowledgement numbers.
-2.
+2. TCP is said to be connection-oriented because before one application process can begin to send data to another, the two process must first 'handshake' with each other. Both sides of the connection will initialize many TCP state variables associated with the TCP connection.
+3. A TCP connection provides a full-duplex service, and it is always point-to-point.
+4. The maximum amout of data that can be grabbed and placed in a segment is limited by the maximun segment size. The MSS is typically set by first determining the length of the largest link-layer frame that can be sent by the local sending host, MTU, and then setting the MSS to ensure that a TCP segment plus the TCP/IP header length will fit into a single link-layer frame. Both Ethernet and PPP link-layer protocols have an MTU of 1500 bytes. Thus a typical value of MSS is 1400 bytes.
+5. The sequence number for a segment is therefore the byte-stream number of the first byte in the segment. The acknowledgement number that Host A puts in its segment is the sequence number of the next byte Host A is expecting from Host B.
+6. Because TCP only acknowledges bytes up to the first missing byte in the stream, TCP is said to provide cumulative acknowledgement.
+7. What does a host do when it receives out-of-order segments in a TCP connection? The TCP RFCs do not impose any rules here.
+8. TCP uses a timeout/retransmission mechanism to recover from lost segments. The most obvious question is the length of the timeout intervals.
+9. The SampleRTT is being estimated for approximately every RTT. Also TCP never computes retransmitted segment.
+10. TCP maintains an average, called EstimatedRTT, of the SampleRTT values.
+11. The RTT variation, DevRTT, is an estimate of how much SampleRTT typically deviates from EstimatedRTT.
+12. TimeoutInterval = EstimatedRTT + 4 * DevRTT
+13. The recommended TCP timer management procedures use only a single retransmission timer.
+14. Doubling the timeout interval: whenever the timeout event occurs, TCP retransmitted the not-yet-acknowledged segment with the smallest sequence number. But each time TCP retransmis, it sets the next timeout interval to twice the previous value. This provides a limited form of congection control.
+15. Fast Retransmit: If the TCP sender receives three duplicate ACKs for the same data, it takes this as an indication that the segment following the segment that has been ACKed three times has been lost. In this case, the TCP sender performs a fast transmit.
+16. Flow Control is a speed-matching service: matching the rate at which the sender is sending against the rate at which the receiving application is reading.
+17. A TCP sender can also be throttled due to congestion within the IP network; this form of sender control is referred to as congestion control.
+18. TCP provides flow control by having the sender maintain a variable called the receive window(rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)). By keeping the amount of unacknowledged data less than the value of rwnd, Host A is assured that it is not overflowing the receive buffer at Host B.
+19. The TCP specification requires Host A to continue to send segments with one data byte when B's receive window is zero.
+20. To establish a TCP connection: (1)The client-side TCP first sends a special TCP segment to the server-side TCP with the SYN bit set to 1 with a client_isn set. For this reason, this special segment is referred to as a SYN segment. (2)The server-side TCP sends a TCP segment with SYN bit set to 1 with a server_isn set. (3)The clients allocates buffers and variables to the connection and send back a TCP segment with SYN bit set to 0.
+21. When closing a TCP connection, the FIN bit is set to 1.
+22. When a host receive a TCP packet whose destination port number doesn't match with an ongoing UDP socket, the host send a special reset segment with the RST bit set to 1, while the UDP host sends a special ICMP datagram. When the client receives neither of above, this likely means that the SYN segment was blocked by an intervening firwall and never reached the target host.
 
 
