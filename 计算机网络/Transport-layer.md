@@ -75,4 +75,8 @@
 21. When closing a TCP connection, the FIN bit is set to 1.
 22. When a host receive a TCP packet whose destination port number doesn't match with an ongoing UDP socket, the host send a special reset segment with the RST bit set to 1, while the UDP host sends a special ICMP datagram. When the client receives neither of above, this likely means that the SYN segment was blocked by an intervening firwall and never reached the target host.
 
+## Principles of Congestion constrol
 
+1. Packet retransmission treats a symptom of network congestion but does not treat the cause of network congestion: too many sources attempting to send data at too high a rate.
+2. Large queuing delays are experienced as the packet-arrival rate nears the link capacity.
+3. Because packets can be retransmitted, we must now be more careful with our use of the term sending rate: (1)the sender must perform retransmission in order to compensate for dropped packets due to buffer overflow. (2)unneeded retransmissions by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet.
