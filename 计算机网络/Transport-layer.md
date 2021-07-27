@@ -79,4 +79,9 @@
 
 1. Packet retransmission treats a symptom of network congestion but does not treat the cause of network congestion: too many sources attempting to send data at too high a rate.
 2. Large queuing delays are experienced as the packet-arrival rate nears the link capacity.
-3. Because packets can be retransmitted, we must now be more careful with our use of the term sending rate: (1)the sender must perform retransmission in order to compensate for dropped packets due to buffer overflow. (2)unneeded retransmissions by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet.
+3. Because packets can be retransmitted, we must now be more careful with our use of the term sending rate: (1)the sender must perform retransmission in order to compensate for dropped packets due to buffer overflow. (2)unneeded retransmissions by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet. (3)when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward the packet to the point at which it is dropped ends up having been wasted.
+4. Approaches to congestion control: (1)end-to-end congestion control: the presence of network congestion must be inferred by the end system based only on observed network behavior. (2)network-asisted congestion control: routers provide explicit feedback to the sender or receiver regarding the congestion state of the network.
+
+## TCP Congestion Control
+
+
